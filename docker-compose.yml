@@ -1,12 +1,10 @@
 version: '3' # composeファイルのバージョン
 services:
-  boiler-plate: # サービス名
-    container_name: boiler-plate
+  app: # サービス名
+    container_name: go-sample
     build: # ビルドに使うDockerファイルのパス
       context: .
-      dockerfile: ./build/Dockerfile
-    volumes: # マウントディレクトリ
-      - ./go-sample:/go/src/go-sample
+      dockerfile: ./Dockerfile
     tty: true # コンテナの永続化
     ports:
       - "8080:8080"
@@ -14,18 +12,4 @@ services:
       - ./build/.go_env
     environment:
       - TZ=Asia/Tokyo
-  mysql:
-    image: mysql:8.3.0
-    container_name: mysql_container
-    ports:
-      - "3306:3306"
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: demo
-      TZ: "Asia/Tokyo"
-    volumes:
-      - ./my.cnf:/etc/mysql/conf.d/my.cnf
-
-
-
-    
+    command: ./start.sh
