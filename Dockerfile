@@ -26,4 +26,4 @@ ENV TZ=Asia/Tokyo
 WORKDIR /go/src
 COPY --from=build-env /go/src/server /server
 COPY --from=build-env /go/src/start.sh .
-ENTRYPOINT ["/server"]
+CMD ["/go/src/start.sh"]
